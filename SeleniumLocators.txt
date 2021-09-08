@@ -1,0 +1,205 @@
+---------------------------------------START----------------------------------------------------------------------------------
+
+Locators: Locators are addresses that identify web elements uniquely within the page.
+Ex:
+id
+name
+linktext
+partial linktext
+class name
+tag name
+
+Customized Locators:
+
+CSS selector:
+tag and id
+tag nd class
+tag and attribute
+tag class and attribute
+
+XPath:
+Absolute xpath
+Relative xpath
+
+//below input is element type, name is attribute, txtusername is value of attribute.
+<input name="txtusername" id="txtusername" type="text">
+
+driver.findElement(By.id("txtusername")).sendKeys("dheeraj");
+driver.findElement(By.name("txtusername")).click();
+driver.findElement(By.linkText("Printed Chiffon Dress")).click();
+driver.findElement(By.partialLinkText("Chiffon Dress")).click();
+
+driver.findElements(By.className("homeslider-container")).size();
+driver.findElements(By.tagName("a")).size();
+
+CSS Selectors Locators:
+---------------------------
+CSS Selector - Tag and ID: tag#id (tag is optional)
+driver.findElement(By.cssSelector("#email")).sendKeys("abc@gmail.com"); //we can write input#email also.
+
+CSS Selector - Tag and Class: tag.class (tag is optional)
+driver.findElement(By.cssSelector(".inputtext")).sendKeys("abc@gmail.com"); //we can write input.inputtext also
+
+CSS Selector - Tag and Attribute: tag[attribute] (tag is optional)
+driver.findElement(By.cssSelector("[name=email]")).sendKeys("abc@gmail.com"); //we can write tag[name=email] also
+
+CSS Selector - Tag class and Attribute: tag.class[attribute=value] (tag or tag.class is optional)
+driver.findElement(By.cssSelector("input.inputtext[data-testid=royal_email]")).sendKeys("abc@gmail.com"); //we can write attribute only also.
+
+
+----------
+XPath
+-----------
+xpath is defined as xml path, it is a syntax or language for finding any element on the web page using xml expression.
+xpath is used to find the location of any web element in web page using HTML DOM(document object model) structure.
+xpath can be used to navigate through web elements and attributes using DOM.
+
+DOM is an API interface provided by browser itself.
+When a web page is loaded browser automatically creates DOM of the page.
+
+Example: /html/body/div[1]/div/div[3]/div[1]/img
+
+Types of XPaths:
+1) Absolute XPath/Full XPath
+           /html/body/div[1]/div/div[3]/div[1]/img //starts from root node(html) and reaches to element ia all nodes
+2) Relative XPath/Partial XPath
+           //*[@id="divlogo"]/img  //directly reaches to element 
+
+Diff between Abosolute & Relative XPaths:
+------------------------------------------
+1) Absolute xpath starts from root node, whereas relative xpath directly jumps to element in DOM.
+2) Absolute xpath starts with '/', whereas relative xpath starts with '//'.
+3) Absolute xpath we use only tags/nodes, whereas relative xpath uses attributes.
+
+Syntax for Relative Xpath:
+-------------------------
+//tagname[@attribute='value'];
+//input[@name='txtusername='];
+or
+//*[@name="txtusername"]; //here * denotes all the tag names available to DOM
+
+How to capture XPath:
+1) Right click on element -->Highlight element ->Right click and Copy XPath
+2) ChroPath Extension
+3) SelectorsHub Extension
+
+Relative XPath is recommended and preferred Xpath, because in absolute Xpath element sometimes gets removed/moved.
+
+XPath Options:
+or
+and
+contains()
+starts-with()
+text()
+chained xpath
+
+XPath using OR Operator:
+---------------------------
+//input[@name='txtusername' or @id='txtname']
+A     B       Result
+True  True    Returns Both
+True  False   Returns A
+False True    Returns B
+False False   No Element
+
+XPath using AND Operator:
+---------------------------
+//input[@name='txtusername' and @id='txtname']
+A     B       Result
+True  True    Returns Both
+True  False   No Element
+False True    No Element
+False False   No Element
+
+Contains() 
+---------------
+//tagname[contains(@attribute,'value')]  //double consecutive double quote not allowed in Java so using single quote for value
+
+//input[contains(@id,'search_query_t')]  //here we don't need to enter exact value of attribute
+
+For Example: Same button changing status from start to stop
+//button[contains(@name,'st')]  //'st' is common ib both start and stop.
+
+//button[starts-with(@name,'st')] //sometimes 'st' can be in middle of name, so we can use starts-with function.
+
+Text()
+----------
+//a[text()='Contact-us']  //under 'a' tag we had many hyperlinks but by text name we clicked to Contact-us link.
+
+Chained XPath()
+-------------------
+//form[@id='searchbox']//input[4] //under form we had multiple elements but by using 4th input tag under form we got searchbox
+
+we also can use name, id attributes also in place of 4.
+
+
+
+---------------------
+Locators XPath Axes
+--------------------------
+XPath Axes are those axes that are used to search for the multiple nodes in the XML document from the current node context.
+These methods are mainly used when the web element is not identified with the help of ID,Name,Class name,link text and css
+selectors.
+
+Self
+Parent
+Child
+Ancestor
+Descendent
+Following
+Followig-sibling
+Preceding
+Preceding-sibling
+
+Refer: LocatorsDemo4 program as example for above XPath Axeses.
+
+Que1: Find the sign-up button from the registration form present in the facebook application? --child
+Ans: //div[@id='reg_form_box']/child::div[10]/button
+
+Que2: Locate first name field from sign up button? --Parent
+Ans: //button[@id='u_3_s_+z']/parent::*/parent::*/child::div[1]/div/div[1]
+
+Que3: Identify the password from the mobile number field? --following
+Ans: //input[@id='u_3_g_o3']/following::input[2]
+
+Que4: Locate the mobile number from password field? --preceding
+Ans: //input[@id='password_step_input']/preceding::input[2]
+
+Que5: Locate surname from female radio button in facebook registration? --Ancestor
+Ans: //label[contains(text(),'Female')]/ancestor::div[2]/div[1]/div/div[2]
+
+Que6: Locate the google search from google search button in google homepage? --Parent
+Ans: //body/div[1]/div[3]/form[1]/div[1]/div[1]/div[3]/center[1]/input[1]/parent::*/parent::*/parent::*/div[1]
+
+Que7: Locate the Today's deal from search box in Amazon homepage? --following
+Ans: //input[@id='twotabsearchtextbox']/following::a[contains(text(),"Today's Deals")]
+
+------------------------------------------------------------------------------------------------------------------------
+
+Locating Elements in Shadow DOM:
+-----------------------------------
+In HTML DOM, Elements present inside '#shadow-root' we can't identify using normal locators.
+
+Refer ShadowDOMExample01 program and ShadowDOMExample02 program.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

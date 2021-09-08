@@ -1,0 +1,141 @@
+Joins:
+---------------
+Inner join or equi join: All matched records from both tables.
+Left join or Left outer join: matched records and unmatched records from left table
+Right join or Right outer join: unmatched records and unmatched records from right table
+Full join or Full outer join: All matched and unmatched records from both left and right tables
+
+SELECT * FROM EMPLOYEES INNER JOIN DEPARTMENTS
+ON EMPLOYEES.NUMID=DEPARTMENTS.NUMID;
+
+SELECT * FROM EMPLOYEES LEFT JOIN DEPARTMENTS
+ON EMPLOYEES.NUMID=DEPARTMENTS.NUMID;
+
+SELECT * FROM TAB1 RIGHT JOIN TAB2
+ON TAB1.DEPTID=TAB2.DEPTID;
+
+SELECT * FROM TAB1 RIGHT JOIN TAB2
+ON TAB1.ENAME<>TAB2.ENAME
+
+SELECT EMPLOYEE_ID, EMPLOYEE_NAME, JOB_ID,DEPARTMENTS.DEPARTMENT_ID,DEPARTMEN_NAME,LOCATION_ID
+FROM EMPLOYEES LEFT JOIN DEPARTMENTS
+ON (EMPLOYEES.DEPARTMENTID=DEPARTMENTS.DEPARTMENTID)
+
+Self join:
+------------
+Retriving data from same table by adding to aliases(duplicates) of table.
+
+SELECT E.EMPLOYEE_ID, M.MANAGER_ID, E.EMPLOYEE_NAME FROM EMPLOYEES E, EMPLOYEES M
+WHERE E.EMPLOYEE_ID=M.MANAGER_ID
+
+
+Sub-Query:
+-------------
+A query within a query is called sub-query.
+for example 1): Display salary whose salary is less than ellans salary;
+here we don't know what is ellans salary so we have to run two queries to 1st get ellans salary then
+use his salary to get to know all employees having less than ellans salary
+
+SELECT SALARY FROM EMPLOYEES WHERE FIRST_NAME = 'ELLAN';
+SELECT SALARY FROM EMPLOYEES WHERE SALARY < 11000.00;
+So now we will write both these queries in one:
+
+SELECT SALARY FROM EMPLOYEES WHERE SALARY < (SELECT SALARY FROM EMPLOYEES WHERE FIRST_NAME = 'ELLAN');
+
+here first sub-query will run and then output of subquery will be used by main query as input.
+
+Ex.2) 2nd max salary from employees
+
+SELECT SALARY FROM EMPLOYEES;
+SELECT MAX(SALARY) FROM EMPLOYEES;
+
+SELECT (MAX)SALARY FROM EMPLOYEES WHERE SALARY<(SELECT (MAX)SALARY FROM EMPLOYEES); //2ND HIGHEST SALARY
+
+SELECT (MAX)SALARY FROM EMPLOYEES WHERE SALARY
+<(SELECT (MAX)SALARY FROM EMPLOYEES WHERE SALARY
+<(SELECT (MAX)SALARY FROM EMPLOYEES));  //3RD HIGHEST SALARY(NESTED SUB QUERY)
+
+Ex.3) Find the salary of employees whole salary is greater than the salary of employee whose EMPLOYEE_ID 150;
+
+SELECT SALARY FROM EMPLOYEES WHERE EMPLOYEE_ID = 150; //SUB QUERY FOR MAIN QUERY
+SELECT SALARY FROM EMPLOYEES WHERE SALARY > (SELECT SALARY FROM EMPLOYEES WHERE EMPLOYEE_ID = 150);
+
+Ex.4) Display the employees who all are earning the highest salary?
+
+SELECT MAX(SALARY) FROM EMPLOYEES;
+SELECT * FROM EMPLOYESS WHERE SALARY = (SELECT MAX(SALARY) FROM EMPLOYEES);
+
+Ex.5) Display employees whose salary is equal to the salary f the at least one employee in department id 30?
+
+SELECT * FROM EMPLOYEES WHERE SALARY IN (SELECT SALARY FROM EMPLOYEES WHERE DEPARTMENT_ID =30); //MULTI ROW SUBQUERY
+or
+SELECT * FROM EMPLOYEES WHERE SALARY <ANY (SELECT SALARY FROM EMPLOYEES WHERE DEPARTMENT_ID =30); //MULTI ROW SUBQUERY
+or
+SELECT * FROM EMPLOYEES WHERE SALARY >ANY (SELECT SALARY FROM EMPLOYEES WHERE DEPARTMENT_ID =30); //MULTI ROW SUBQUERY
+or
+SELECT * FROM EMPLOYEES WHERE SALARY >ALL (SELECT SALARY FROM EMPLOYEES WHERE DEPARTMENT_ID =30); //MULTI ROW SUBQUERY
+or
+SELECT * FROM EMPLOYEES WHERE SALARY >ALL (SELECT SALARY FROM EMPLOYEES WHERE DEPARTMENT_ID =30); //MULTI ROW SUBQUERY
+
+
+Ex.6) Query to get department name of the employee? (departname is available to department table not employees but department id is available)
+
+SELECT FIRST_NAME,SALARY,DEPARTMENT_ID (SELECT DEPARTMENT_NAME FROM EMPLOYESS WHERE EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS_DEPARTMENT_ID) DNAME FROM EMPLOYEES;
+
+Here we gave DNAME as alias to sub query results.
+
+Ex.7) List out the employees who are having salary less than the maximum salary and also having hire date greater than the 
+      hire date of an employee who is having maximum salary?
+For this type of multi row query we should start from last not first condition. So
+
+SELECT EMPLOYEE_ID, FIRST_NAME,SALARY,HIRE_DATE FROM EMPLOYEES WHERE SALARY <(SELECT MAX(SALARY) FROM EMPLOYEES) AND HIRE_DATE >(SELECT HIRE_DATE FROM EMPLOYEES WHERE SALARY=(SELECT MAX(SALARY) FROM EMPLOYEES));
+
+
+VIEW:
+--------
+View is a virtual/logical structure of table/multiple tables, this used to restrict uses to main table based on SQL query
+So basically View is result of SQL statement for security purpose.
+
+CREATE VIEW EMPLOYEES_V1 AS SELECT EMPLOYEE_ID,FIRST_NAME,SALARY FROM EMPLOYEES;
+SELECT * FROM EMPLOYEES_V1;
+DROP VIEW EMPLOYEES_VI;
+
+So basically all DDL, DML, DCL commands will work on View same like tables.
+
+INDEX:
+------------
+Indexes are used to retrieve data from database very fast(for example index page in Books)
+CREATE INDEX IDX_EMPLOYEES ON EMPLOYEES (FIRST_NAME);
+DROP INDEX IDX_EMPLOYEES ON EMPLOYEES;
+
+AUTO_INCREMENT:
+----------------
+Auto_increment are used only in integer value columns and while using this we must specify that column as Primary Key.
+
+CREATE TABLE STUDENT
+(SID INT(5) PRIMARY KEY AUTO_INCREMENT,SNAME VARCHAR(12),MARKS INT(5));
+
+here, deleted SID will not re-inserted again. for example if we delete SID=2 from table then this will not used in next inset.
+
+SET_SQL_SAFE_UPDATES =0; // This query used before deleting items from table for safe deletion.
+
+ALTER TABLE STUDENT AUTO_INCREMENT =100; //Here the SID will start incrementing from 100..101.....So..On
+
+
+LIMIT:
+-----------
+SELECT * FROM EMPLOYEES LIMIT 10;
+SELECT * FROM EMPLOYEES LIMIT 5,10;
+
+
+
+
+
+
+
+
+
+
+
+
+

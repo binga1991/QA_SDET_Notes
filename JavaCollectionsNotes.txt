@@ -1,0 +1,301 @@
+--------------------------------------------------------------------------------
+-------------------------Java Collections Start----------------------------------------
+Collection: Group of objects together are called collection
+Collection Framework: Group of classes and interfaces by which we can represent group of Object
+                      in to single entity.
+
+Array:
+Object a[]=new Object[5];
+1. Fixed length(not growable in nature)
+2. Accept only homogenous data
+3. Don't have readymade data structure pre defined methods available to use
+
+To Overcome above issues we have now below collections:
+ArrayList
+List
+HashMap
+HashTable
+vector
+Tree
+Stack
+.... So on
+-------------------------------------------
+Collection(interface): List(interface), Set(interface), Queue(interface)
+
+Collection -> List--> 
+List is a child of collection interface
+Insertion order preserved
+Duplicates allowed
+
+We have list of classes which implements List: ArrayList, LinkedList, Vector(Stack)
+
+Collection -> Set -->
+Set is a child interface of collection interface
+Insertion order not preserved
+Duplicates not allowed
+
+We have list of classes which implements Set: HashSet and LinkedHashSet
+
+Collection -> Queue -->
+Queue is a child interface of collection interface
+Queue used when we have a object prior to processing(FIFO)
+
+We have 'Priority Queue' as class which implements Queue.
+---------------------------------------------------------------------------------
+
+Map Interface(Independent of Collection):
+Key  Value
+-------------
+100  Ram
+101  Shyam
+103  Rahul
+
+So we get key-pairs, and key can't be duplicated. both Key and Value is Object. we have set of classes
+which implements Map concept in java:
+-- HashMap
+-- Linked HashMap
+-- HashTable
+------------------------------------------------------------------------------
+Methods Available in Collection Interface:
+---------------------------------------------------------
+1) add(object o) --> Adds given object to collection
+2) addAll(collection c) --> Adds all objects to collection
+3) remove(object o) --> Removes given object from collection
+4) removeAll(collection c) --> Removes all objects from collection
+5) retainAll(collection c) --> Except given objects retain all
+
+6) clear() - To clear all objects from collection
+7) isEmpty() - To check this collection is empty or not
+8) size() - This gives size of collection
+9) contains(object o) - This checks particular object available in collection or not
+10) containsAll(collection c) - This checks all this objects available in collection or not
+11) toArray(collection c) - This method converts entire collection to Array and Object array returns
+-----------------------------------------------------------------------------------------------------
+Methods Available in List Interface
+---------------------------------------------------------
+List uses index concept to add, insert, remove operations
+-- add(index, object) - This will add object to given index in List
+-- addAll(index, collection) - This will add collection of objects to given index in List
+-- remove(index) - Given index number object will be removed from List
+-- get(index) - This will retrive object exists to given index in List
+-- Set(index, object) - To add new object to given index in List
+-------------------------------------------------------------------------
+
+ArrayList:
+--------------
+ArrayList is a class which preserves all methods available in List
+ArrayList available as part of java.util package
+
+ArrayList al=new ArrayList(); //normal approach of array list initiation
+ArrayList<String> al=new ArrayList<String>(); //Fixing only same data type elements to arraylist
+
+
+LinkedList:
+------------------
+In ArrayList when we do insertion/deletion shifting of elements takes places which causes performance issues.
+but in case for retriving operation ArrayList is best to practice,because by index number we can get elements.
+
+|null |x|next|  |prev|y|next|  |prev|z|null|
+       0              1              2
+So, LinkedList is recommended for insertion/deletion, and not recommended for retrieval.(ArrayList recommended)
+
+For Ex: if we have 100 nodes in LinkedList, and if you want to retrieve 66th element then 65 navigations required
+to check addresses from 66th element to 1st element.
+
+Methods in LinkedList:
+------------------------
+All methods used in ArrayList also available in LinkedList, apart from this LinkedList also uses Dequeue methods.
+LinkedList usually used for building stack and queue.
+
+addFirst(obj)
+addLast(obj)
+removeFirst()
+removeLast()
+getFirst()
+getLast()
+
+------------------------
+Set Interface: HashSet
+--------------------------
+1) Duplicates not allowed
+2) Insertion order not preserved
+3) HashCode concept will work, no index concept.
+4) Allowed Heterogenous data
+5) NULL also allowed
+
+If our operation have more number of searches then always go for HashSet, here searches will be faster.
+
+HashSet hs=new HashSet(); //initial default size is 16 always, we can increase later
+
+LoadFactor and Fill Ratio:
+(0.75) is default load factor for HashSet, as soon as 75% HashSet filled, new object will be created and 
+old one will move to garbage. hs object will reference to new object.
+
+HashSet hs=new HashSet(Location,LoadFactor);
+HashSet hs=new HashSet(100,0.95); // 0.75 is default load factor but we can increase that
+
+HashSet <Integer> hs=new HashSet <Integer>(); //for storing only Homogenous data
+
+Methods in HashSet:
+--------------------
+add(value);
+addAll(collection);
+remove(value);
+removeAll(collection);
+contains(obj);
+containsAll(collection);
+isEmpty();
+
+And, we can display elements in HashSet using for, for..each, Iterator method/loops. no sorting and shuffling available.
+We do union, intersection, difference and subset using addAll,removeAll,containsAll methods.
+
+----------------------
+LinkedHashSet:
+--------------------------
+Difference between HashSet and Linked HashSet is "insertion order preserved" in Linked HashSet.
+So insertion will have same order on which inserted in Linked HashSet.
+
+Initial Size ->16
+Load Factor ->0.75
+
+Same Methods will be used to Linked HashSet which we used in HashSet.
+
+LinkedHashSet lset=new LinkedHashSet();
+LinkedHashSet<Integer> lset=new LinkedHashSet<Integer>();
+
+
+----------------
+Queue Interface
+------------------
+Dequeue(interface)
+Block Queue(interface)
+Blocking Dequeue(interface)
+
+Priority Queue(class)
+LinkedList(class) -> this class implemented methods from List and Queue interfaces.
+
+Queue is a concept where we define elements oriot to processing, this follows FIFO concept. First element called as head and
+last element as tail. So head will process first then so on ..to tail as last element.
+
+Diff between Prority Queue VS LinkedList:
+-----------------------------------------------
+                         LinkedList PriorityQueue
+------------------------------------------------
+Insertion order preserved  Yes       Yes
+Duplicates allowed         Yes       Yes
+Heterogenous data allowed  Yes       No
+
+
+Methods in Priority Queue and LinkedList:
+-----------------------------------------
+add() -> Added success then returns True, else returns exception
+offer() -> Added success then returns True, else returns false
+element() -> Will return head element from queue, if queue empty then throws exception 'no such element exception'
+peak() -> Will return head element from queue, if queue empty then throws null
+remove() -> Will return head element and remove, if queue empty then throws exception 'no such element exception'
+poll() -> Will return head element and remove, if queue empty then throws null
+
+
+
+--------------
+Map Interface
+------------------
+Map is a collection,but map interface not part of collection series, this is independent concept implemented using
+HashMap and HashTable concept. here we use key and value concept to make a pair to represent group of object/elements.
+Every key and value is object.
+
+Duplicate keys not allowed, but values are allowed.
+Every Pair(key and value) is called as Entry.
+
+HashMap(C): 
+--------------
+When we have more number of searching, we use map concept because searching is very faster.
+1) Underlaying data structure is HashTable
+2) Insertion order not preserved
+3) Duplicate keys not allowed
+4) Duplicate values are allowed
+5) Null key allowed only once
+6) Null values are allowed multiple time
+
+Methods used in HashMap:
+---------------------------
+put(key, value); //add element/object
+putAll(map c); //add new map collection
+get(key); //to get pair by key
+remove(key); //to remove pair using key
+containsKey(key); //returns true/false
+containsValue(value);//returns true/false
+isEmpty();//returns true/false
+size(); //gives size of elements in hashmap
+clear(); //clears all entry in hashmap
+
+Keyset(); //returns a Set as return type(because key not duplicated and Set don't allow duplicates)
+Values(); //returns collectionreturn type(because values can be duplicates and Set don't allow duplicates so collection used)
+entrySet(); //returns all entry pairs
+
+Entry Sub-Interface:
+Pair(key and value) as Entry used as sub-interface inside HashMap as special interface for entry purpose.
+Methods used in Entry Sub-Interface:
+e.getKey(); //e is object of Entry Sub-interface
+e.getValue();
+e.setValue(object, value);
+
+
+-------------
+HashTable(C)
+------------------
+Here also data format will be inserted as pair of (key, value)
+Underlaying data structure will be hashtable itself. both hashmap and hashtable uses hashcode.
+-------------------------------------------------------------------
+      HashMap                          HashTable
+-------------------------------------------------------------------------
+Non-Synchronized                      Synchronized
+Multiple threads paralelly allowed    At a time one only one thread allowed, rest in wait
+Not Thread safe                       Thread safe
+Performance faster                    Performance poor/low
+Null accepted(key(only once),value)   Nulls can't be accepted
+------------------------------------------------------------------------------------
+
+Methods used in HashTable:
+----------------------------
+Same methods as HashMap.
+
+
+
+------------------------------------END--------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

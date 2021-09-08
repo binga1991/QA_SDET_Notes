@@ -1,0 +1,329 @@
+URL: http://demo.guru99.com/v4/
+
+UserID: mngr348793
+Password: vUjUqEj
+
+1) Page objects --> LoginPage.java
+AddCustomerPage.java
+EditCustomerPage.java
+DeleteCustomerPage.java
+
+2) Utilities --> ReadConfig.java
+Reporting.java
+XLUtils.java
+
+3) Config Files -> pom.xml
+Extent-config.xml
+Log4j.properties
+Config.propertis
+
+4) Test Cases --> Base Class
+loginTest.java
+addNewCustomer.java
+edit Customer.java
+delete Customer.java
+
+5.1) TestNG.XML
+5.2) pom.xml
+
+6) Maven --> Run.bat
+
+7) Jenkins  --> Report
+
+Note: Step 1 to 4 Implementation or development part
+Step 5.1 and 5.2 are Execution part
+Step 6 and 7 are Maintanance(Contineous Integration)
+
+Phase 1: Implementation 
+-- Create Maven Project
+-- Update pom.xml
+-- Create Page Objects
+-- Create Basic Test Case
+-- Add Logs to Test Case
+-- Read common values from properties file
+-- Run test case in desired browser
+-- Add Extent Report
+-- Create Data driven test case
+
+Phase 2: Execution
+-- Run test cases with Maven pom.xml
+-- Run test cases through Maven CLI(Command Line Interface)
+-- Run test cases using run.bat
+-- Run test cases using Jenkins(using bat files)
+
+Phase 3: Maintenance
+-- Creating repository in GITHUB
+-- Commit the project code in local repository
+-- Push the project code to GITHUB remote repository from 
+   local GIT repository
+
+To download all dependencies to pom.xml use below URL:
+https://mvnrepository.com/
+
+
+
+To Add New Test Case --> We will have 3 parts:
+Setup (All Prerequisites like system.set property, webdriver object etc.(Execute Before Class)
+Test Case (@Test annotation)
+Tear Down (Executed After the Class)
+
+So Setup and Tear down method will be common to all Test Cases so
+we will create them in Base Class and we can extend base class to
+other test cases.
+
+log4j
+-------------------
+log4j.jar
+log4j.properties
+
+Read common values from Properties file
+----------------------------------------
+config.properties
+ReadConfig.java(mediater file between config.properties and BaseClass) called as utlities file.
+
+System.getProperty("user.dir") --> only in java classes
+./ --> in java classes and properties file (Both are same)
+
+Run your Test Cases in Desired Browser
+---------------------------------------
+We have to add TestNG.xml file to project directory and inside
+of TestNG.xml we have to give browser as parameter name, project
+name as suite name with classes as test case we're executing.
+For Example check created TestNG.xml file.
+
+we can duplicate class value inside classes to give all browsers
+as parameters to run on.
+
+Extent Report
+--------------
+-- jars file
+-- extent-config.xml
+-- Listener(Reporting.java) -->Utility file
+-- Add Entry of Listener to TestNG.xml file
+
+We have to check Extent report generated under "test-output" folder under project. right click and open with system editor
+
+
+Data Driven Testing
+----------------------------
+-- Apache poi jars
+-- XLS file(test data)
+-- XLUtils.java(under Utilities package)
+
+@DataProvider Annotations we will use.
+
+with this we have designed 99% of AUtomation Framework
+----------------------------------------------------------
+Now to add New Test Case we just required o to add two things:
+-- Page Object class
+-- Test class
+
+To Run All Test Cases we use TestNG.xml file, but to re-run only failed Test Cases --> Refresh "test-output" folder and check file
+"testng-failed.xml" file and Run.
+
+
+Phase 2: Execution (Also called Contineous Integration CI)
+-----------------------------------------------------------
+1. Run test using pom.xml file(useful in running framework without    Eclispe which is testng.xml file. pom.xml will refer testng.xml)
+2. Pom.xml file will have two parts(dependencies and plugins)
+3. 2 Plugins required to run pom.xml(Compiler and Surefire plugin)
+
+
+Run Test Cases through Maven CLI
+---------------------------------
+1. Download Maven for Windows and unzip and Save to C:\ drive
+2. Create and Set Maven Home path to Environment Variables 
+3. Include till bin folder C:\apache-maven-3.5.4\bin
+4. Check Project location in computer C:\Users\Neha\eclipse-workspace\inetBankingV1_21
+5. Run below commands in cmd
+cd C:\Users\Neha\eclipse-workspace\inetBankingV1_21
+dir --> to check project directory
+mvn clean install --> To Run test cases
+
+
+Run Test Cases through run.bat file
+-------------------------------------
+1. Go to project location and create a newfile run.bat file
+2. cd C:\Users\Neha\eclipse-workspace\inetBankingV1_21
+   mvn clean install
+Enter above two commands to run.bat and Save.
+3. Double click on run.bat batch file to run test cases
+
+
+Run Test Cases using Jenkins(Continuous Integration Tool)
+----------------------------------------------------------
+Maven (to create Build tool)
+Jenkins ( CI Tool)
+Git (Repository)
+GitHub (Repository)
+Navigate to URL https://www.jenkins.io/download/ and download LTS Windows installer to download
+We have 2 Approaches to run project using Jenkins
+1) Execute project using free style project(run.bat)
+2) Execute project using Maven(pom.xml)-Real time case
+
+Free style project(run.bat)
+-----------------------------
+New Item -> Item name(project name --> Freestyle project -> Ok
+then scroll down select Build -> select batch file option-> Enter
+project location and run.bat file name and Apply and Save
+
+Now go to saved project details and click to Build Now in left side
+of window to run project.
+
+Maven Project(pom.xml)
+-----------------------------
+New Item -> Item name(project name --> Maven project -> Ok
+then scroll down select Build -> Add JDK Home version and select Maven Home version intalled -> Enter Project pom.xml file location and "clean install" as Goals and options.--> Apply and Save
+
+Now go to saved project details and click to Build Now in left side
+of window to run project.
+-------------------------------------------
+Local Reporsitory(GIT, perforce,VSS,SVN)
+Remote/Global Repository(GITHUB)
+
+In Real time Jenkins will be in DevOps server and our project code in Local so we can't run. to overcome this we use Repository concept by pushing codes from local respositaries to central global repository with different versions name and this is called Configuration management/Version Control System.
+
+--Install Git in local system
+URL to Use: https://git-scm.com/download/win/
+
+Untracked file(in Eclipse but not in GIT) -->Add Command-->Tracked file(Commited in GIT)->Commit Command -->Commited File-->Push command --> RemoteFile(GITHUB Repository)
+So, Untracked file(working directory)
+Tracked file to Commited file(Staging area)
+Commited File to Remote File(GIT Repository)
+
+--Install GitHub in local system
+Go to Url and create account (binga1991/1@testing) created.
+Login and Create URL for Remote repository
+click to create repository and give name same as project name
+URL generated for remote repository:https://github.com/binga1991/inetBankingV1_21.git
+
+COMMANDS:
+Go to Project folder and right click and select Git Bash to open
+1. git init ->create an Empty local Git repository
+2. git remote add origin "https://github.com/binga1991/inetBankingV1_21.git" -> to connect local and remote repository
+(Step 1 and 2 will be run for first time of configuration only)
+3. git status  -> this will give all files untracked and ready to commit to git(red color)
+4. git add -A -> this will add all untracked files staging area(check status after this, files will
+ change to green color)
+5. clear -> to clear previous results in git bash screen(non mandatory)
+6. git config --global user.name "binga1991" -> username of github
+7. git config --global user.email "dheerajpandey827@gmail.com" -> email id of github
+(Step 6 and 7 will be done for 1st tim only when we configure first time)
+8. git commit -m "this is my first commit for inetBankingV1_21" -> this will commit all files to git repo
+9. git status --> run again status command and this should give nothing to commit in branch
+
+Now we will do 2nd round of process, which is git repo to github repo push/pull
+-------------------------------------------------------------------------------
+1. git push -u origin master  --> this will push all files to Github Repo
+2. Login to Github and check files placed under project
+
+In a Scenraio, somebody else commited a file and if you want to access that File:
+----------------------------------------------------------------------------------
+1. We have created a TextFile.txt file in Github and commited
+2. git pull origin master --> this will pull TextFile.txt to Git/Eclipse/Project folders
+3. git status (run this command after editing TextFile.txt file in eclipse
+4. git add -A (we can use directly file name in place of A)
+5. git commit -m (modified file will be from staging to commited(git)
+6. git push -u origin master ( this will push file to remote github repo)
+
+now go to Github and check changes made to file.
+
+So now we will check changes made to Github by running through Jenkins
+-----------------------------------------------------------------------
+1. Go to Jenkins and Add new item (select project name_github as name)
+2. select maven and Ok, Select checkbox github project and enter github repo URL
+3. Enter Github repository URL in Source code management section
+4. Enter pom.xml and clean install in Build section
+5. Apply and Save.
+6. Run on clicking to Build Now.
+
+
+--------------------------------------------------------------------------------------------------------------------------
+Allure Report
+--------------
+To Use Alure report in your framework we have to first make changes to pom.xml file.
+1) add after surefire plugin
+<argLine>
+-javaagent:"${settings.localRepository}/org/aspect/aspectjweaver/${aspectj.version}/aspectjweaver-${aspect.version}.jar"
+</argLine>
+
+2) Add dependency under dependencies from MVN repo url
+<dependency>
+    <groupId>io.qameta.allure</groupId>
+    <artifactId>allure-testng</artifactId>
+    <version>2.14.0</version>
+</dependency>
+
+3) Add after step-1 argline and configuration closing tab
+<dependencies>
+<dependency>
+<groupId>org.aspectj</groupId>
+<artifactId>aspectjweaver</artifactId>
+<version>${aspectj.version}</version>
+</dependency>
+</dependencies>
+
+at final save pom.xml, refresh project and update maven and add below to testCases classes:
+
+1) after the @test add all of them -- descriptions are suppose to change according to your requirements
+@Test(priority=1, description="verifying create new account test")
+@Severity(SeverityLevel.NORMAL)
+@Description("Test Case Description: Verify Creating New Account for existing user's only")
+@Story("Story Name: To Check Only Valid User Gets New Account")
+
+do not forget to import all above used methods from io.qameta.
+
+2) Add @Step to page oject class actions/methods
+@Step("Verifying able to click to New Account Link")
+Description is subject to change according to your requirements.
+
+Run through CMD because pom.xml has to download allure plugins etc. So take project directory
+and run cd <project directory>
+then, mvn clean test --> this will run your tests
+again, to install allure if not installed 
+and finally run: allure serve <allure-results folder path from project>
+
+Allure Annotations:
+-------------------
+Description
+Severity
+Epic
+Feature
+Story
+Step
+
+And, To attach screenshots to the report we use TestNG Listeners.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

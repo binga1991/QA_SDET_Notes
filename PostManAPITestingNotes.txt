@@ -1,0 +1,351 @@
+-------------------------------------------------------------------------------------------------------------
+----------------------------API Testing------------------------------------------------------------
+
+Client: A computer hardware devide or software that accesses a service made available by server. the server(often
+but not always) located on a separate physical computer.
+
+Server: A server is a physical computer dedicated to run services to serve the needs of other computers. depending 
+on the service that is running. it could be a file server, database server, home media server, print server or web server.
+
+Client/Server Architecture:
+
+1-tier: This works only as File server, for example word,excel. installed in machine and user can open,edit and file will be saved to file server. no internet required.
+
+2-tier: This we have client machine and Database server, So once we insert/update/delete using LAN and office local server all
+transactions will be saved to database server using internet.
+
+3-tier: here we have client and database tier, and in between we are having business layer(application layer) which every web application uses. So you can say client machine(presentation layer), business logic(application layer) and Database layer(data layer). here internet is always required.
+
+Presentation layer: HTML, Javascript, CSS
+Application layer: Java, .Net, C#, Python, C++
+Data layer: MySQL, Oracle, Postgre SQL, SQL Server, MongoDB.
+
+API: Group of programs in application layer present, to test them without using Presentation layer is called API Testing.
+
+* All web services are APIs, but All APIs are not web services. because APIs moved to internet called web services but
+  APIs we test in local QA region is not called web services.
+* Web service is an API wrapped in HTTP
+* Web service might not perform all operations that an API would perform
+* Web services always require internet, while APIs  not required
+
+Types of WebServices:
+----------------------
+Soap services ( old technology mostly not used now - request and response both happens using XML, only post request)
+Restful services ( new technology, this uses many type of formats like HTML JSON Text XML. we can sent different type of requests like post, get, put and delete)
+
+http requests:
+-------------------
+GET(select)
+POST(create) //Request body/Request payload required
+PUT(update)  ////Request body/Request payload required
+DELETE(delete)
+
+Every request will give you response in JSON format/HTML/XML/Text etc.
+
+URI(Uniform resource identifiers): https://reqres.in/api/users?page=2 --> 
+https://reqres.in   -->Domain
+/api/users          -->Path paramters
+page=2              -->Query parameters
+
+Path parameter gives/returns data whereas Query parameter filters the data.
+
+// Add JSON Path Finder chrome extension for working with complex JSON scenarios.
+
+URLs for practice Data:
+-----------------------
+https://dummy.restapiexample.com/
+https://dummy.reqres.in/
+
+--------------------------------------------------------------------------------------
+Data driven testing
+How to run Collections
+Exporting/Importing Collections
+
+Req URl(Post): http://dummy.restapiexample.com/api/v1/create
+
+Request Body/Request Payload:
+
+{"name":"John","salary":"1234","age":"35"} //here data is hard coded, so to give data using CSV
+
+Data format for: CSV and JSON
+Request Body format:
+
+{"name":"{{name}}","salary":{{salary}}","age":"{{age}}"}
+
+URL to Convert CSV to JSON and Vice Versa:
+https://csvjson.com/csv2json
+
+How to run postman collection/requests from commands line:
+---------------------------------------------------------------
+
+1. Install node js and npm
+check in CMD with node -v --> will give you node js installed version
+also check npm -v --> this will give npm version installed with node js
+
+2. Install newman
+npm install -g newman --> to install newman from command
+3. Export collection and then run from command prompt
+
+No. of ways to run collection through command prompt:
+--------------------------------------------------------
+Method-1)
+
+newman run <<exported collection file.json>>
+newman run DemoAPIs.postman_collection.json --> given folder location for collection saved.
+
+Method-2) generating html report
+
+newman run <<DemoAPIs.postman_collection.json>> -r html
+this will generate html report. //before this we have to install html plugin using newman command
+
+npm install newman-reporter-html --> to install html reported plugin
+
+Method-3) Executing collections remotely
+
+We have to share our collection and then get that URL. so now anybody can run collection using that
+link.
+right click to collection and click to share, then select getpublic link/JSON link.
+
+newman run <<shared url>> -r html  -> use this command to run remotely.
+
+
+
+How to create own API's(Fake API's)
+----------------------------------------
+pre-requisites:
+
+Install NodeJS
+npm (comes with NodeJS)
+install json-server -- npm install -g json-server in cmd
+
+after installation-> execute below command to run API's
+json-server <<filename.json>>
+
+http://localhost:3000/users/ request number created using this URL.
+
+
+Postman Variables:
+-------------------
+1) collection Variable (these works at collection level)
+2) environment variable/global variable (these will work among all collections/environment.
+
+for example: http://localhost:3000 is common to all requests we created. so we can create this as variable and use in
+every request we create. 
+go to collection and click to 3 dots
+click to edit and select last option as variable
+name variable as 'url' and enter value 'http://localhost:3000'
+
+To set variable as global variable:
+
+go to collection and click to 3 dots
+click to edit and select pre-request Scripts section and write below query
+
+postman.setGlobalVariable("url","http://localhost:3000")
+
+To Define Order of Requests to run:
+-----------------------------------
+
+for this under tests section(validations) we have to write below statement:
+
+postman.setNextRequest("RequestNameTo Run"); //this we have to specify in previous request we run.
+
+----------------------------------------------------------------------------------------------------------------------
+
+How To Chain API Requests
+Authorizations
+----------------------------
+API Request1 -->Response
+API Request2 -->Response
+API Request3 -->Response
+
+We will create a GET request and then response of that we will use as request to PUT request. So we have created a global
+variables username and then value stored in this username we will use in PUT request.
+
+GET Request:
+jsonData=JSON.parse(responseBody)
+value=jsonData.data[0].first_name
+pm.globals.set("username",value);
+
+PUT Request:
+"name": "{{username}}",
+"job": "zion resident"
+
+
+Authorizations:
+---------------------
+Basic Auth2.0 --> https://postman-echo.com/basic-auth
+username:postman
+password:password
+
+API Key Auth: --> api.openweathermap.org/data/2.5/forecast/daily?q=Delhi&cnt=1 (this will give daily weather forecast)
+API Key/appid: fe9c5cddb7e01d747b4611c3fc9eaf2c (in real time instractions will be given to generate api key)
+here we can change city and number of count days we want forecast in URL
+
+Bearer Token/OAuth 2.0 --> https://developer.github.com/v3/repos/
+in page select link "create repository for authenticated user" and generate token from your github repo
+go to settings and developer settings and generate token.
+
+Body(paylod) in JSON:
+{
+    "name": "Hello World Bearer Token Auth123",
+    "description": "This created for API Testing",
+    "homepage": "https://github.com",
+    "private": false,
+    "has_issues": true,
+    "has_projects": true,
+    "has_wiki": true
+}
+
+--------------------------------------------------------------------------------------------------------------------------
+Postman Scripting:
+-------------------
+Go to 'postman learning center' google search, then go to developer section and click to writing script link
+
+Pre-Request Script ----> Request ---->Response ----->Request(Test Request)
+Order of Execution will be:
+-----------------------------
+collection pre-script
+     folder pre-script
+         request pre-request
+                       Request(main request)
+         collection test script
+     folder test script
+request test script
+
+We can write requests at collection level, folder level and Requests level.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Postman Scripting using JavaScript and Chai BDD:
+-------------------------------------------------
+navigate to 'Chai Assertion Library' url to see all options used as part of postman scripting.
+
+//status code validation
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+//Multiple Assertions
+pm.test("validate multiple fields in response", function () {
+    responseJson=pm.response.json();
+    pm.expect(responseJson.data.id).to.eql(3);
+    pm.expect(responseJson.data.email).to.eql("emma.wong@reqres.in");
+    pm.expect(responseJson.data.first_name).to.eql("Emma");
+    pm.expect(responseJson.data.last_name).to.eql("Wong");  
+});
+//Handling responses that don't parse
+pm.test("Body contains string", function(){
+pm.expect(pm.response.text()).to.include("emma.wong@reqres.in")
+});
+//Handling multiple status codes
+pm.test("Successful status code", function () {
+    pm.expect(pm.response.code).to.be.oneOf([200,201]);
+});
+//Testing Headers
+pm.test("Content-Type header present", function () {
+    pm.response.to.have.header("Content-Type");
+});
+pm.test("Content-Type header value", function () {
+    pm.expect(pm.response.headers.get("Content-Type")).to.eql("application/json; charset=utf-8");
+});
+//Testing Cookies
+pm.test("Cookies is present", function(){
+pm.expect(pm.cookies.has("__cfduid")).to.be.false;
+})
+pm.test("Cookies is value check", function(){
+pm.expect(pm.cookies.get("__cfduid")).to.be.equal("cookie value");
+})
+//Response Time
+pm.test("Response time less than 20 ms", function(){
+pm.expect(pm.response.responseTime).to.be.below(500);
+})
+----------------------------------------------------------------------------------------------------
+
+File Upload & Download using Rest API:
+--------------------------------------
+Demo App: https://github.com/pavanoltraining/spring-boot-file-upload-download-rest-api.git
+
+Pre-requisites: Java and Maven installed
+
+1. Open CMD from file location folder 
+2. Run below commands:
+   java -jar target/file-demo-0.0.1-SNAPSHOT.jar (this should be running to access API, as this hosted in local system and can    be accessed without internet.
+3. Application url: http://localhost:8080 
+4. Single file upload: http://localhost:8080/uploadFile   -> use this as Post request and select single only in body select files.
+
+5. Multiple file upload: http://localhost:8080/uploadMultipleFiles  -> use this as Post request and select multiple in body select files.
+6. Single file download: http://localhost:8080/downloadFile/TestFile.txt -> as Get request to download file.
+
+We also can keep test validations also to verify responses to both upload files and download file.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Postman Exporting & Importing Collections:
+---------------------------------------------
+Search for 'countries rest api' and look for sample APIs under API endpoints:
+
+Sample1: https://restcountries.eu/rest/v2/name/{name} //assign any country name to name variable in url
+Sample2: https://restcountries.eu/rest/v2/capital/{capital} //assign any capital name and it will return country name.
+
+Go to collection and export to some folder
+Again click to import and select file/folder/link location, collection will be imported.
+
+Publish Collections API document:
+--------------------------------------
+Go to collection and select three dots, select 'Publish docs'
+Now give required information and publish, copy generated url
+Now open that url or send to anyone to check published document. //you'll get small but valuable document.
+
+Run Collections using CMD:
+---------------------------
+newman run <<location of collections with collection name>>.json
+
+Run Collections using Jenkins:
+-------------------------------
+Go to Jenkins, Create a new item(project) and navigate to Build configuration and select Windows batch command
+Now give same command we used to run from CMD
+newman run <<location of collections with collection name>>.json
+
+also, to make console looks better without unicode chars use: --disbale-unicode after 'newman run' and before location.
+
+-----------------------------------------------------END---------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

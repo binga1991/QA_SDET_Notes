@@ -1,0 +1,715 @@
+Data Types
+------------
+int x= 50
+double x= 10.50
+float x= 10.50
+String x="Welcome"
+char x='A'
+boolean x=true
+
+Operators
+----------------
+a=10;
+b=20;
+
+c=a+b;
+
+a,b,c are called variables
+a & b called as operands too
+= & + called operators
+
+Arithmetic operators: + - * % /
+Relational operators: < > <= >= != == (always returns boolean value either true or false)
+Logical operators: && || ! ( These also always returns boolean value either true or false)
+Assignment operators: = += *= /=
+Increment operators: ++
+Decrement operators: --
+
+Relation Operators:
+a	b	a<b	a>b	a<=b	a>=b	a==b	a!=b
+10	20	TRUE	FALSE	TRUE	FALSE	FALSE	TRUE
+
+Logical Opeartors:
+a	b	a&&b	a||b	!a	!b
+TRUE	TRUE	TRUE	TRUE	FALSE	FALSE
+TRUE	FALSE	FALSE	TRUE	FALSE	
+FALSE	TRUE	FALSE	TRUE		
+FALSE	FALSE	FALSE	FALSE		TRUE
+
+
+Conditional Statement
+---------------------------
+if
+if....else
+Nested if....else
+Switch...case
+
+case1: age>18 eligible for vote
+
+if(condition)
+{
+//code
+}
+
+case2: age<18 Not eligible for vote
+
+if(age<18)
+{
+  //code
+}
+else
+{
+  //code
+}
+
+case3: 1- 7 (1-sunday,2-monday,3-tuesday.......)
+if(condition)
+{
+  //code
+{
+else if(condition)
+{
+   //code
+}
+else if(condition)
+{
+  //code
+}
+else
+{
+  //code
+}
+
+case4: Switch(variable)
+{
+case condition1; //code; break;
+case condition2; //code; break;
+----
+----
+----
+default://code;
+}
+
+Java Loops
+------------------------------------------
+while loop
+do..while loop
+for loop
+for..each loop(Enhanced for loop)
+
+-- while loop
+while(condition)
+{
+----
+----//code
+----
+}
+
+--do while loop
+do
+{
+---
+---//code
+}while(condition);
+
+-- for loop
+initialization
+condition
+incre/decrement
+
+for(initialize;condition;inc/dec)
+{
+  //code
+}
+
+
+Arrays
+----------------------------
+To store mutlipe values of same data types to single variable we use Array
+int a[]=new int[5] //single dimensional array
+Every array item identified by index number which always starts with 0.
+
+a[0]=10;
+a[1]=20;
+--
+--
+a[4]=50;
+
+//s.length used in array to get length of array which is predefined method in java
+//in array we mostly use each..for loop 
+for(Datatype indexvariable:arrayvariable)
+{
+  //code
+}
+
+1) How to declare an array
+2) How to store elements in array
+3) How to read elements from an array
+4) How to store values without limit
+
+int a[]=new int[5]; //integer array
+String s[]=new String[5]; //String array
+char c[]=new char[5]; // only characters
+
+Object Class
+--------------------------
+We can use any data type of elements inside array variable 
+"O" in Object will always be in captial letter
+
+Object a[]=new Object[5];
+
+
+2 Types of Array
+-------------------------------
+Single Dimensional Array
+Two dimensional/multi dimensional Array:->>
+
+int a[row][column]=new int[3][2];
+
+same above concepts will be used, but here we have to use 2 for loops one each for row and column
+Also, in 2-D array we recomment to use for..each loop
+for(datatype indexvariableofrow[]:a) //i is index variable for row
+{
+  for(datatype indexvariableofcolumn:indexvariableofrow)
+  {
+  //code
+  }
+}
+
+2-D Array without Limit
+-------------------------
+int a[][]=new int[5][3]; //with limits
+
+int a[][]={ {1,2,3},{4,5,6},{7,8,9},{10,11,12},{13,14,15} };
+
+here we can use for..each loop above given and print array items
+
+
+String Methods
+--------------------------------
+String s="Welcome"; //here String is datatype, s is variable and Welcome is value s variable holds
+
+length(); //returns length od string
+concat(); // joins the strings
+equals(); // compare the strings
+equalsIgnoreCase(); //compare the string(ignore case sensitivity)
+contains(); //check a string contains another string
+substring(); //it always has starting index and ending index - extracting sub string from main string
+replace(); //replacing chars/strings within a string
+
+SubString:
+0 1 2 3 4 5 6 --> starting index(always starts with 0)
+W E L C O M E
+1 2 3 4 5 6 7 --> ending index(always starts with 1)
+
+substring(strating index, ending index)
+s.substring(0,3) --> W E L
+s.substring(2,5) --> L C O
+s.substring(4,7) --> O M E
+
+Replace - To replace string chars/string itself with different 
+		
+s.replace('e', 'a')
+s.replace("come", "kame")
+
+
+OOPS Concepts
+------------------------------------------------
+Class, Object & Methods
+
+A class is collection of variables and methods.
+Object is an instance of class(physical).
+A method is a piece of code which will perform certain tasks.
+methods should be part of a class.
+
+declaration:
+class Employee
+{
+  variables
+  methods
+}
+
+create an object for the class:
+
+Employee emp1=new Employee()
+
+Employee ---> class name
+emp1 ---> reference variables of object
+Employee() --->instantiation
+
+Employee emp2=new Employee();
+
+Method:Syntax:
+------------------
+void m1() //if void defined then no return type, else defined data type and enter return.
+{
+//code
+}
+
+
+How many ways we can initialize the values to class variables
+---------------------------------------------------------------
+1) using Object directly
+2) using constructor
+3) using method
+
+--> constructor is kind of method, but the constrcutor should have same name as class.
+    constructor never returns any value so we don't defined any datatype
+
+Methods:
+--------------
+1)A method may not take parameters
+2) A method takes parameters 
+3) A method returns some value
+4) A method may not return any value
+
+
+---------------------------------------------------------------------
+Method overloading
+Constructor overloading
+this keyword
+static keyword
+---------------------------------------------------------------------
+Overloading: A class contains more than one method with same name different paramters is called as overloading
+Constructor overloading: A class contains more than one constructor(class name same) with different parameters is called overloading
+
+class Test
+{
+
+void m1()
+{
+//code
+}
+
+void m1()
+{
+//code
+}
+
+}
+
+Ex: Test t=new Test();
+    t.m1(); // so here how we will define which m1 method has been called?
+So we will differentiate by below three criteria:
+1) number of parameters
+2) order of parameters
+3) datatype of parameters
+Above will be applicable for both method overloading and constructor overloading
+
+
+Constructor 
+----------------
+1) Constructor is special kind of method
+2) Constructor name should be same as class name
+3) Constructor will not return any value
+4) Constructor will be invoked at the time of object creation(no need to call constructor explicitely)
+5) Constructor will take the parameters(just like method)
+6) Constructor is used for initializing the values
+
+Two types of Constructors:
+1) default constructor
+2) parameterized constructor
+
+Can we overload main method also??
+------------------------------------
+Yes...we can overload but JVM always will look for String Array main method first for execution.
+class Test
+{
+
+public static void main(String [] args)
+{
+//code
+}
+
+public static void main()
+{
+//code
+}
+
+public static void main(int a,int b)
+{
+//code
+}
+
+}
+
+this keyword:
+--------------
+Whenever we use same external variable name as local variable, we use this keyword to assign local variable to overcome issue.
+
+class Test
+{
+int a=0; //external variables
+int b=0;
+
+void sum()
+{
+  this.a=10; //local variables
+  this.b=20;
+}
+}
+
+------------------------------------------------------------
+static keyword
+System.out.println()
+public static void main()
+JDK, JRE & JVM
+-----------------------------------------------------------
+static keyword:
+
+static int a;
+
+static void()
+{
+//code
+}
+
+1) Whenever we define any variable or method as static then we can access directly using class name, no need to create object
+2) static variables or methods are shared across all the objects.
+3) static methods can access only static stuffs, not static variables/methods.
+4) static methods can also access non static stuffs through Object only.
+5) Non static methods can access everything(static & non static variables/methods - direct access)
+
+Method	   Static Variable	Nonstatic Variable	Static Method	Nonstatic Method
+Static	   Yes	                Yes(through Object)	Yes	        Yes(through Object)
+NonStatic  Yes	                Yes 	                Yes	        Yes 
+
+
+System.out.println()
+-------------------------
+class Test
+{
+  static String s="welcome";
+}
+
+Test.s.length() //to access above s variable here, we need class(Test).variable(s).length(String Method)
+
+class System //System is pre defined class in java
+{
+  static PrintStream out //out is static variable in System class
+}
+
+System(class).out(variable).println(method of PrintStream class) //println is method belongs to PrintStream class
+
+
+public static void main()
+-------------------------------------
+JDK consists of JRE and JVM
+JRE consists of JVM
+JVM responsible for executing java programs
+
+So "public static void main(String []args)" is fixed syntax which is used by JVM to run program. here if you change
+for example change String to int --> this will not even give option to run java program. 
+Yes, here you can write variable 'args' to any other or write brackets before or after 'args'.
+
+-----------------------------
+Inheritance
+-------------------------------
+Reusability-is concept behind inheritance
+Acquiring variables and methods from parent class to child class is called inheritance
+
+class A //Parent class/super class/base class
+{
+//code
+}
+class B extends A //child class/sub class/derived class //single inheritance
+{
+//code
+}
+class C extends B //here B super class for C, and A is superclass for B //multilevel inheritance
+{
+//code
+}
+
+We can not achieve multiple inheritance if for class C, A, B are classes. using Interface concept we can achieve multiple inheritance. So for class C to achieve multi inheritance both A and B should be Interfaces
+
+--------------------------------
+Method Overriding
+----------------------------------
+class A
+{
+void m1()
+{
+//code
+----
+}
+}
+
+class B extends A
+{
+void m1() //Method defintion(parameters) should be same as parent class, though we can change body of methods
+{
+//code
+}
+}
+Re-define the same method from parent class in to child class is called Overriding.
+
+Method overloading V/S Method overriding
+--------------------------------------------------------------------------------------
+Overloading                                      Overriding
+-----------------------------------------------------------------------------------------
+no inheritance required                          atleast we should have 2 classes(1 parent and 1 child).      
+definition should not be same                    definition should be same. but body can be changed.
+
+
+Types of inheritance:
+-------------------------------------------------------------
+single inheritance
+multilevelinheritance
+multiple inheritance(can not achieve using class)
+hierarchical inheritance
+hybrid inheritance
+---------------------------------------------------------------
+
+Final Keyword:
+---------------
+Final -->variable, method & class
+
+Final int a=10; //final used with variable, variable value can't change
+Final void m1() //final used with method, method can't be overrriden in child class
+{
+}
+Final class Test //final used with class, class can't be extended
+{
+//code
+}
+
+------------------
+Interface
+-------------------------
+1) A blueprint of class
+2) interface contains only static and final variables(by default)
+3) in interface by default methods are public(can be accessed from anywhere)
+4) in interface methods are by default abstract(a method have only definition but not implementation)
+5) interface to interface we use extends 
+
+interface TestInt
+{
+//variables
+//methods
+}
+
+class TestClass implements TestInt //to implement interface to class we use "implements" not extends
+{
+ void m1()
+ {
+   //implement the body
+ }
+}
+
+6) we can't instantiate object using interface name
+TestInt obj=new TestInt(); //not valid with interface name, we must use class name for this
+TestClass obj=new TestClass(); // valid
+
+
+Multiple inheritance using interface
+-----------------------------------------------
+Here for example class C having two parent classes, so we can't use extends here. we will use interfaces, by changing
+both class A and B to interfaces we can achieve Multiple inheritance
+
+interface A
+{
+//methods and variables
+}
+interface B
+{
+//methods and variables
+}
+public class C implements A,B
+{
+//code for methods defined to interfaces
+//interfaces methods must be public
+}
+
+------------------------------
+Packages
+--------------------------------
+Collection of classes is called packages
+2 types of packages:
+1) user defined packages(packages we define)
+2) built in packages(packages offered by Java itself)
+
+import statement will be used for using built-in packages.
+
+--------------------------
+Access Modifiers 
+-------------------------
+private --> variables/methods accessed within the class only
+default --> variables/methods without any access modifiers will be considered default, can be accessed within package.
+protected --> accessible within the package and outside of the package but through inheritance only.
+public --> can be accessible everywhere(within the package and outside of package)
+
+Access Modifiers	Within Class	Within Package	Outside Package
+Private	                Yes	        No	        No
+Default	                Yes	        Yes	        No
+Protected	        Yes	        Yes	        Yes(using inheritance only)
+Public	                Yes	        Yes	        Yes 
+------------------------------------------------------------------------------------------------
+
+Exception Handling
+----------------------------
+2 types of exceptions:
+1) Checked Exceptions --> Exceptions identified by Java compiler
+Ex: IOException,FileNotFoundException etc....
+
+2) Un-Checked Exceptions --> Exceptions which are not indetified by Java compiler
+Ex: ArithmeticException, NullPoiterException, NumberFormatException, ArrayIndexOutofBoundException etc....
+
+To handle all above exceptions we use below try catch block:
+-------
+-------
+try
+{
+//specify the statement which causes exception
+}
+catch(Exception Type)
+{
+//write the code
+}
+------
+-------
+
+We have enhanced try,catch and finally also:
+
+try
+{
+//specify the statement which causes exception
+}
+catch(Exception Type)
+{
+//write the code
+}
+finally
+{
+
+}
+----------------------------------------------------------------------
+1) Exception occurs, catch block handles, finally block also execute
+2) Exception occurs, catch block not handles, finally block execute
+3) Exception not occurs, catch block will ignore, finally block execute
+---------------------------------------------------------------------------
+
+Checked Exceptions
+-----------------------
+InterruptedException
+FileNotFoundException
+IOException
+---------------------
+
+There are two types of methods to handle exceptions
+----------------------------------------------------
+1) try...catch block (handling checked and un-checked exceptions)
+2) throws keyword (only for checked exceptions)
+
+HandleExceptionBlock	Un-checked	Checked	  MethodLevel	StatementLevel
+-------------------------------------------------------------------------------
+try…catch	        Yes	        Yes	  No	        Yes
+throws	                No	        Yes	  Yes	        No
+-----------------------------------------------------------------------------------
+
+
+ArrayList and HashMap
+-------------------------
+Array Limitations:
+1) Fixed in size --> ?? ArrayList
+2) can hold same data type elements --> by Object creation we overcame this probelm
+
+ArrayList: ArrayList is a data structure in java
+           ArrayList has not limit (we can enter any number of elements)
+           ArrayList can store any kind of data type elements
+
+int a[]=new int[10]; //normal array declaration
+
+Notation1:
+ArrayList al=new ArrayList(); //allows all the data type elements
+
+Notation2:
+ArrayList<String> al=new ArrayList<String>(); //This will only allow String data type elements because String defined
+
+ArrayList<integer> al=new ArrayList<integer>(); //this will store only integer data type
+
+al.add() --> adding elements in to array list
+al.size() -->returns number of elements
+al.add(2,"value") --> inserting value in the middle
+al.remove("value") --> remove specified element
+al.remove(index) --> remove after number of elements
+
+------------
+Hash Map
+--------------
+HashMap contains key and value.
+Key and their value combinely called as keypair.
+
+EMPNAME Pavan ----> Key pair (entry set)
+EMPNO 123
+DEPTNO 30
+EMPNAME, EMPNO, DEPTNO --> keys
+Pavan, 123, 30 --> values
+
+100, "ram"
+101, "shyam"
+102, "rahul"
+
+HashMap <Integer, String> hm=new HashMap <Integer, String>();
+
+hm.put(100, "rahul")
+hm.remove(100)
+
+--------------------------------------------------------------------------
+-----------------------------------END----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- break
+
+
+
+
+
